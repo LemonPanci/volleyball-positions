@@ -94,8 +94,8 @@ function setup() {
     ];
 
     // set up court and rotations for the draggable part
-    const courtSize = 300;
-    const courtX = 400;
+    const courtSize = 550;
+    const courtX = 300;
     const courtY = padding;
     draggableCourt = new Court(courtX, courtY, courtSize);
 
@@ -114,7 +114,7 @@ function setup() {
 
     // radio to select which rotation to use
     rotationRadio = createRadio();
-    rotationRadio.position(100, 25);
+    rotationRadio.position(25, 25);
 
     rotationRadio.option("0", 'p1');
     rotationRadio.option("1", 'p2');
@@ -129,7 +129,7 @@ function setup() {
 
     // radio to select which version of the court to display: normal, divided in zones, or without any lines
     courtRadio = createRadio();
-    courtRadio.position(400, 25);
+    courtRadio.position(300, 25);
 
     courtRadio.option("normal", 'Normale');
     courtRadio.option("zones", 'Zone');
@@ -139,7 +139,7 @@ function setup() {
 
     // radio to select which version of the court to display: normal, divided in zones, or without any lines
     constraintsRadio = createRadio();
-    constraintsRadio.position(700, 25);
+    constraintsRadio.position(600, 25);
 
     constraintsRadio.option("for", 'per il giocatore');
     constraintsRadio.option("from", 'dal giocatore');
