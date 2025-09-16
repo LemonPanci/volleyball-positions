@@ -77,23 +77,23 @@ function getDefenseP1(x, y, courtSize, roles) {
 
 function getDefenseP2(x, y, courtSize, roles) {
     const hikawa_defense_p1 = new Rotation(x, y, courtSize, roles, 1, true);
-    hikawa_defense_p1.updateCourtPositionByIndex(0, 4 / 5 * courtSize, 3 / 5 * courtSize);
-    hikawa_defense_p1.updateCourtPositionByIndex(1, 1 / 6 * courtSize, 1 / 4 * courtSize);
-    hikawa_defense_p1.updateCourtPositionByIndex(2, 1 / 2 * courtSize, 1 / 10 * courtSize);
-    hikawa_defense_p1.updateCourtPositionByIndex(3, 5 / 6 * courtSize, 1 / 4 * courtSize);
-    hikawa_defense_p1.updateCourtPositionByIndex(4, 1 / 2 * courtSize, 3 / 4 * courtSize);
-    hikawa_defense_p1.updateCourtPositionByIndex(5, 1 / 5 * courtSize, 3 / 5 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(0, 1 / 5 * courtSize, 3 / 5 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(1, 5 / 6 * courtSize, 1 / 4 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(2, 1 / 6 * courtSize, 1 / 4 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(3, 1 / 2 * courtSize, 1 / 10 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(4, 4 / 5 * courtSize, 3 / 5 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(5, 1 / 2 * courtSize, 3 / 4 * courtSize);
     return hikawa_defense_p1;
 }
 
 function getDefenseP3(x, y, courtSize, roles) {
     const hikawa_defense_p1 = new Rotation(x, y, courtSize, roles, 2, true);
-    hikawa_defense_p1.updateCourtPositionByIndex(0, 4 / 5 * courtSize, 3 / 5 * courtSize);
-    hikawa_defense_p1.updateCourtPositionByIndex(1, 1 / 6 * courtSize, 1 / 4 * courtSize);
-    hikawa_defense_p1.updateCourtPositionByIndex(2, 1 / 2 * courtSize, 1 / 10 * courtSize);
-    hikawa_defense_p1.updateCourtPositionByIndex(3, 5 / 6 * courtSize, 1 / 4 * courtSize);
-    hikawa_defense_p1.updateCourtPositionByIndex(4, 1 / 2 * courtSize, 3 / 4 * courtSize);
-    hikawa_defense_p1.updateCourtPositionByIndex(5, 1 / 5 * courtSize, 3 / 5 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(0, 1 / 2 * courtSize, 3 / 4 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(1, 1 / 2 * courtSize, 1 / 10 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(2, 5 / 6 * courtSize, 1 / 4 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(3, 1 / 6 * courtSize, 1 / 4 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(4, 1 / 5 * courtSize, 3 / 5 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(5, 4 / 5 * courtSize, 3 / 5 * courtSize);
     return hikawa_defense_p1;
 }
 
@@ -110,22 +110,22 @@ function getDefenseP4(x, y, courtSize, roles) {
 
 function getDefenseP5(x, y, courtSize, roles) {
     const hikawa_defense_p1 = new Rotation(x, y, courtSize, roles, 4, true);
-    hikawa_defense_p1.updateCourtPositionByIndex(0, 4 / 5 * courtSize, 3 / 5 * courtSize);
-    hikawa_defense_p1.updateCourtPositionByIndex(1, 1 / 6 * courtSize, 1 / 4 * courtSize);
-    hikawa_defense_p1.updateCourtPositionByIndex(2, 1 / 2 * courtSize, 1 / 10 * courtSize);
-    hikawa_defense_p1.updateCourtPositionByIndex(3, 5 / 6 * courtSize, 1 / 4 * courtSize);
-    hikawa_defense_p1.updateCourtPositionByIndex(4, 1 / 2 * courtSize, 3 / 4 * courtSize);
-    hikawa_defense_p1.updateCourtPositionByIndex(5, 1 / 5 * courtSize, 3 / 5 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(0, 1 / 5 * courtSize, 3 / 5 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(1, 5 / 6 * courtSize, 1 / 4 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(2, 1 / 6 * courtSize, 1 / 4 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(3, 1 / 2 * courtSize, 1 / 10 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(4, 4 / 5 * courtSize, 3 / 5 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(5, 1 / 2 * courtSize, 3 / 4 * courtSize);
     return hikawa_defense_p1;
 }
 
 function getDefenseP6(x, y, courtSize, roles) {
     const hikawa_defense_p1 = new Rotation(x, y, courtSize, roles, 5, true);
-    hikawa_defense_p1.updateCourtPositionByIndex(0, 4 / 5 * courtSize, 3 / 5 * courtSize);
-    hikawa_defense_p1.updateCourtPositionByIndex(1, 1 / 6 * courtSize, 1 / 4 * courtSize);
-    hikawa_defense_p1.updateCourtPositionByIndex(2, 1 / 2 * courtSize, 1 / 10 * courtSize);
-    hikawa_defense_p1.updateCourtPositionByIndex(3, 5 / 6 * courtSize, 1 / 4 * courtSize);
-    hikawa_defense_p1.updateCourtPositionByIndex(4, 1 / 2 * courtSize, 3 / 4 * courtSize);
-    hikawa_defense_p1.updateCourtPositionByIndex(5, 1 / 5 * courtSize, 3 / 5 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(0, 1 / 2 * courtSize, 3 / 4 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(1, 1 / 2 * courtSize, 1 / 10 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(2, 5 / 6 * courtSize, 1 / 4 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(3, 1 / 6 * courtSize, 1 / 4 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(4, 1 / 5 * courtSize, 3 / 5 * courtSize);
+    hikawa_defense_p1.updateCourtPositionByIndex(5, 4 / 5 * courtSize, 3 / 5 * courtSize);
     return hikawa_defense_p1;
 }
