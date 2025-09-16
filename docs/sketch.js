@@ -85,12 +85,12 @@ function setup() {
     defenseCourt = new Court(defenseX, defenseY, defenseSize);
 
     defenseRotations = [
-        getDefenseP1(defenseX, defenseY, defenseSize, roles),
-        getDefenseP2(defenseX, defenseY, defenseSize, roles),
-        getDefenseP3(defenseX, defenseY, defenseSize, roles),
-        getDefenseP4(defenseX, defenseY, defenseSize, roles),
-        getDefenseP5(defenseX, defenseY, defenseSize, roles),
-        getDefenseP6(defenseX, defenseY, defenseSize, roles)
+        getNeutralDefenseP1(defenseX, defenseY, defenseSize, roles),
+        getNeutralDefenseP2(defenseX, defenseY, defenseSize, roles),
+        getNeutralDefenseP3(defenseX, defenseY, defenseSize, roles),
+        getNeutralDefenseP4(defenseX, defenseY, defenseSize, roles),
+        getNeutralDefenseP5(defenseX, defenseY, defenseSize, roles),
+        getNeutralDefenseP6(defenseX, defenseY, defenseSize, roles)
     ];
 
     // set up court and rotations for the draggable part
