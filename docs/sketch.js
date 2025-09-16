@@ -42,7 +42,7 @@ function setup() {
     textAlign(CENTER, CENTER);
 
     const roles = [
-        "P", "A1", "C1", "O", "A2", "C2"
+        "P", "A1", "C2", "O", "A2", "C1"
     ];
 
     const padding = 5;
