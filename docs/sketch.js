@@ -204,6 +204,10 @@ function mousePressed() {
     startDraggingPlayer(mouseX, mouseY);
 }
 
+function touchStarted() {
+    startDraggingPlayer(touches[0].x, touches[0].y);
+}
+
 function startDraggingPlayer(x, y) {
     draggedPlayer = currentRotation.getPlayerByPosition(x, y);
     if (draggedPlayer) {
@@ -227,6 +231,10 @@ function mouseDragged() {
     dragPlayer(mouseX, mouseY);
 }
 
+function touchMoved() {
+    dragPlayer(touches[0].x, touches[0].y);
+}
+
 function dragPlayer(x, y) {
     if (draggedPlayer) {
         draggedPlayer.updatePosition(x, y);
@@ -245,6 +253,10 @@ function dragPlayer(x, y) {
 
 // on mouse release stops dragging the player underneath and hides the constraint highlights
 function mouseReleased() {
+    stopDraggingPlayer();
+}
+
+function touchEnded() {
     stopDraggingPlayer();
 }
 
