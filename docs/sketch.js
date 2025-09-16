@@ -201,7 +201,11 @@ function draw() {
 
 // on mouse press starts dragging the player underneath and shows the constraint highlights
 function mousePressed() {
-    draggedPlayer = currentRotation.getPlayerByPosition(mouseX, mouseY);
+    startDraggingPlayer(mouseX, mouseY);
+}
+
+function startDraggingPlayer(x, y) {
+    draggedPlayer = currentRotation.getPlayerByPosition(x, y);
     if (draggedPlayer) {
         switch (constraintsRadio.value()) {
             case "for":
@@ -220,8 +224,12 @@ function mousePressed() {
 
 // on mouse dragged if a player is being dragged update it's position and if necessary it's related constraints
 function mouseDragged() {
+    dragPlayer(mouseX, mouseY);
+}
+
+function dragPlayer(x, y) {
     if (draggedPlayer) {
-        draggedPlayer.updatePosition(mouseX, mouseY);
+        draggedPlayer.updatePosition(x, y);
         switch (constraintsRadio.value()) {
             case "from":
                 horizontalConstraint.setY(draggedPlayer.y);
@@ -237,6 +245,10 @@ function mouseDragged() {
 
 // on mouse release stops dragging the player underneath and hides the constraint highlights
 function mouseReleased() {
+    stopDraggingPlayer();
+}
+
+function stopDraggingPlayer() {
     if (draggedPlayer) {
         hideConstraintsForDragged();
         hideConstraintsFromDragged();
