@@ -175,7 +175,7 @@ function setup() {
     constraintsRadio.selected("for");
 
     // radio to toggle the invalid color for the draggable players in positional foul
-    let invalidColorRadioTitle = createP('Verifica Giocatori in Fallo');
+    let invalidColorRadioTitle = createP('Verifica Giocatori in Fallo di Posizione');
     invalidColorRadioTitle.position(menuX, menuY + 4 * menuStep - 40);
 
     invalidColorRadio = createRadio();
