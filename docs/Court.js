@@ -52,7 +52,7 @@ class Court {
         rect(x, y, w, h);
         push();
         fill('black');
-        textAlign('RIGHT');
+        textAlign(RIGHT, BOTTOM);
         textSize(20);
         text(n, textX, textY);
         pop();
