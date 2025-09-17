@@ -108,6 +108,7 @@ function setup() {
         new Rotation(courtX, courtY, courtSize, roles, 5)
     ];
 
+    // constraint lines
     horizontalConstraint = new HorizontalConstraint(courtX, courtX + courtSize, 0, 'red');
     verticalConstraint1 = new VerticalConstraint(0, courtY, courtY + courtSize, 'red');
     verticalConstraint2 = new VerticalConstraint(0, courtY, courtY + courtSize, 'red');
