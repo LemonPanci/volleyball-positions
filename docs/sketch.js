@@ -116,6 +116,9 @@ function setup() {
     const menuStep = 50;
 
     // radio to select which rotation to use
+    let rotationRadioTitle = createP('Rotazione');
+    rotationRadioTitle.position(menuX, menuY - 40)
+
     rotationRadio = createRadio();
     rotationRadio.position(menuX, menuY);
 
@@ -131,6 +134,9 @@ function setup() {
     rotationRadio.changed(setRotation);
 
     // radio to select the formation for the current rotation
+    let formationRadioTitle = createP('Formazione');
+    formationRadioTitle.position(menuX, menuY + menuStep - 40);
+
     formationRadio = createRadio();
     formationRadio.position(menuX, menuY + menuStep);
 
@@ -143,6 +149,9 @@ function setup() {
     formationRadio.changed(setRotation);
 
     // radio to select which version of the court to display: normal, divided in zones, or without any lines
+    let courtRadioTitle = createP('Tipo di Campo');
+    courtRadioTitle.position(menuX, menuY + 2 * menuStep - 40);
+
     courtRadio = createRadio();
     courtRadio.position(menuX, menuY + 2 * menuStep);
 
@@ -153,6 +162,9 @@ function setup() {
     courtRadio.selected("normal");
 
     // radio to select which version of the court to display: normal, divided in zones, or without any lines
+    let constraintsRadioTitle = createP('Limiti di Posizione');
+    constraintsRadioTitle.position(menuX, menuY + 3 * menuStep - 40);
+
     constraintsRadio = createRadio();
     constraintsRadio.position(menuX, menuY + 3 * menuStep);
 
@@ -163,7 +175,10 @@ function setup() {
     constraintsRadio.selected("for");
 
     // radio to toggle the invalid color for the draggable players in positional foul
-    invalidColorRadio = createRadio('Abilita Verifica');
+    let invalidColorRadioTitle = createP('Verifica Giocatori in Fallo');
+    invalidColorRadioTitle.position(menuX, menuY + 4 * menuStep - 40);
+
+    invalidColorRadio = createRadio();
     invalidColorRadio.position(menuX, menuY + 4 * menuStep);
 
     invalidColorRadio.option("enabled", 'Abilita');
