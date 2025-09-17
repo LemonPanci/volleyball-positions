@@ -15,10 +15,7 @@ let rotationRadio;
 let courtRadio;
 let constraintsRadio;
 let formationRadio;
-let resetButton;
-let receiveButton;
-let defenseButton;
-let toggleInvalidColorButton;
+let invalidColorRadio;
 // Number of the currently selected rotation
 let currentSelectedIndex;
 // Flag for disabling the coloring for players in invalid positions
@@ -165,10 +162,16 @@ function setup() {
 
     constraintsRadio.selected("for");
 
-    // button to toggle the invalid color for the draggable players
-    toggleInvalidColorButton = createButton('Verifica');
-    toggleInvalidColorButton.position(menuX, menuY + 6 * menuStep);
-    toggleInvalidColorButton.mousePressed(toggleInvalidColor);
+    // radio to toggle the invalid color for the draggable players in positional foul
+    invalidColorRadio = createRadio('Abilita Verifica');
+    invalidColorRadio.position(menuX, menuY + 4 * menuStep);
+
+    invalidColorRadio.option("enabled", 'Abilita');
+    invalidColorRadio.option("disabled", 'Disabilita');
+
+    invalidColorRadio.selected("enabled");
+
+    invalidColorRadio.changed(toggleInvalidColor);
 }
 
 function draw() {
