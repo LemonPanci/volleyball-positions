@@ -14,6 +14,7 @@ let currentRotation;
 let rotationRadio;
 let courtRadio;
 let constraintsRadio;
+let formationRadio;
 let resetButton;
 let receiveButton;
 let defenseButton;
@@ -130,11 +131,23 @@ function setup() {
 
     rotationRadio.selected("0");
 
-    rotationRadio.changed(resetRotation);
+    rotationRadio.changed(setRotation);
+
+    // radio to select the formation for the current rotation
+    formationRadio = createRadio();
+    formationRadio.position(menuX, menuY + menuStep);
+
+    formationRadio.option("base", 'Base');
+    formationRadio.option("receive", 'Ricezione');
+    formationRadio.option("defense", 'Difesa');
+
+    formationRadio.selected("base");
+
+    formationRadio.changed(setRotation);
 
     // radio to select which version of the court to display: normal, divided in zones, or without any lines
     courtRadio = createRadio();
-    courtRadio.position(menuX, menuY + menuStep);
+    courtRadio.position(menuX, menuY + 2 * menuStep);
 
     courtRadio.option("normal", 'Normale');
     courtRadio.option("zones", 'Zone');
@@ -144,28 +157,13 @@ function setup() {
 
     // radio to select which version of the court to display: normal, divided in zones, or without any lines
     constraintsRadio = createRadio();
-    constraintsRadio.position(menuX, menuY + 2 * menuStep);
+    constraintsRadio.position(menuX, menuY + 3 * menuStep);
 
     constraintsRadio.option("for", 'per il giocatore');
     constraintsRadio.option("from", 'dal giocatore');
     constraintsRadio.option("none", 'nessuno');
 
     constraintsRadio.selected("for");
-
-    // button to reset the draggable players to the reference positions
-    resetButton = createButton('Reset');
-    resetButton.position(menuX, menuY + 3 * menuStep);
-    resetButton.mousePressed(resetRotation);
-
-    // button to copy the receive positions to the draggable players
-    receiveButton = createButton('Ricezione');
-    receiveButton.position(menuX, menuY + 4 * menuStep);
-    receiveButton.mousePressed(copyReceiveRotation);
-
-    // button to copy the defense position to the draggable players
-    defenseButton = createButton('Difesa');
-    defenseButton.position(menuX, menuY + 5 * menuStep);
-    defenseButton.mousePressed(copyDefenseRotation);
 
     // button to toggle the invalid color for the draggable players
     toggleInvalidColorButton = createButton('Verifica');
@@ -286,6 +284,25 @@ function copyReceiveRotation() {
 // sets the position of the players in the draggable court to the defense position
 function copyDefenseRotation() {
     currentRotation.copyCourtPositions(defenseRotations[currentSelectedIndex])
+}
+
+function setRotation() {
+    let rotationsToCopy;
+    switch (formationRadio.value()) {
+        case "receive":
+            rotationsToCopy = receiveRotations;
+            break;
+        case "defense":
+            rotationsToCopy = defenseRotations;
+            break;
+        case "base":
+        default:
+            rotationsToCopy = referenceRotations;
+            break;
+    }
+    for (let i = 0; i < draggableRotations.length; ++i) {
+        draggableRotations[i].copyCourtPositions(rotationsToCopy[i]);
+    }
 }
 
 function toggleInvalidColor() {
