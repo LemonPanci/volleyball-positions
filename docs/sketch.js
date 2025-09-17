@@ -113,9 +113,13 @@ function setup() {
     verticalConstraint1 = new VerticalConstraint(0, courtY, courtY + courtSize, 'red');
     verticalConstraint2 = new VerticalConstraint(0, courtY, courtY + courtSize, 'red');
 
+    const menuX = 950;
+    const menuY = 100;
+    const menuStep = 50;
+
     // radio to select which rotation to use
     rotationRadio = createRadio();
-    rotationRadio.position(25, 25);
+    rotationRadio.position(menuX, menuY);
 
     rotationRadio.option("0", 'p1');
     rotationRadio.option("1", 'p2');
@@ -130,7 +134,7 @@ function setup() {
 
     // radio to select which version of the court to display: normal, divided in zones, or without any lines
     courtRadio = createRadio();
-    courtRadio.position(300, 25);
+    courtRadio.position(menuX, menuY + menuStep);
 
     courtRadio.option("normal", 'Normale');
     courtRadio.option("zones", 'Zone');
@@ -140,7 +144,7 @@ function setup() {
 
     // radio to select which version of the court to display: normal, divided in zones, or without any lines
     constraintsRadio = createRadio();
-    constraintsRadio.position(600, 25);
+    constraintsRadio.position(menuX, menuY + 2 * menuStep);
 
     constraintsRadio.option("for", 'per il giocatore');
     constraintsRadio.option("from", 'dal giocatore');
@@ -150,22 +154,22 @@ function setup() {
 
     // button to reset the draggable players to the reference positions
     resetButton = createButton('Reset');
-    resetButton.position(950, 75);
+    resetButton.position(menuX, menuY + 3 * menuStep);
     resetButton.mousePressed(resetRotation);
 
     // button to copy the receive positions to the draggable players
     receiveButton = createButton('Ricezione');
-    receiveButton.position(950, 100);
+    receiveButton.position(menuX, menuY + 4 * menuStep);
     receiveButton.mousePressed(copyReceiveRotation);
 
     // button to copy the defense position to the draggable players
     defenseButton = createButton('Difesa');
-    defenseButton.position(950, 125);
+    defenseButton.position(menuX, menuY + 5 * menuStep);
     defenseButton.mousePressed(copyDefenseRotation);
 
     // button to toggle the invalid color for the draggable players
     toggleInvalidColorButton = createButton('Verifica');
-    toggleInvalidColorButton.position(950, 200);
+    toggleInvalidColorButton.position(menuX, menuY + 6 * menuStep);
     toggleInvalidColorButton.mousePressed(toggleInvalidColor);
 }
 
