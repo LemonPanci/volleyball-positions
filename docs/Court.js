@@ -37,12 +37,24 @@ class Court {
         push();
         strokeWeight(5);
         fill(this.color);
-        rect(this.x, this.y, zoneWidth, zoneHeight);
-        rect(this.x + zoneWidth, this.y, zoneWidth, zoneHeight);
-        rect(this.x + 2 * zoneWidth, this.y, zoneWidth, zoneHeight);
-        rect(this.x + 0, this.y + zoneHeight, zoneWidth, zoneHeight);
-        rect(this.x + zoneWidth, this.y + zoneHeight, zoneWidth, zoneHeight);
-        rect(this.x + 2 * zoneWidth, this.y + zoneHeight, zoneWidth, zoneHeight);
+        this.zoneRect(this.x, this.y, zoneWidth, zoneHeight, '4');
+        this.zoneRect(this.x + zoneWidth, this.y, zoneWidth, zoneHeight, '3');
+        this.zoneRect(this.x + 2 * zoneWidth, this.y, zoneWidth, zoneHeight, '2');
+        this.zoneRect(this.x + 0, this.y + zoneHeight, zoneWidth, zoneHeight, '5');
+        this.zoneRect(this.x + zoneWidth, this.y + zoneHeight, zoneWidth, zoneHeight, '6');
+        this.zoneRect(this.x + 2 * zoneWidth, this.y + zoneHeight, zoneWidth, zoneHeight, '1');
+        pop();
+    }
+
+    zoneRect(x, y, w, h, n) {
+        const textX = x + w - 10;
+        const textY = y + h - 10;
+        rect(x, y, w, h);
+        push();
+        fill('black');
+        textAlign('RIGHT');
+        textSize(20);
+        text(n, textX, textY);
         pop();
     }
 
