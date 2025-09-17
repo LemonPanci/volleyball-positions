@@ -114,7 +114,7 @@ function setup() {
     verticalConstraint1 = new VerticalConstraint(0, courtY, courtY + courtSize, 'red');
     verticalConstraint2 = new VerticalConstraint(0, courtY, courtY + courtSize, 'red');
 
-    const menuX = 950;
+    const menuX = 910;
     const menuY = 100;
     const menuStep = 50;
 
