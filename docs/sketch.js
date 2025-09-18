@@ -35,7 +35,7 @@ const invalidPlayerColor = "red";
 
 function setup() {
     let canvas = createCanvas(900, 650);
-    canvas.position(0, 70);
+    canvas.parent("canvas");
     ellipseMode(CENTER);
     textAlign(CENTER, CENTER);
 
