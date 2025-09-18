@@ -111,16 +111,12 @@ function setup() {
     verticalConstraint1 = new VerticalConstraint(0, courtY, courtY + courtSize, 'red');
     verticalConstraint2 = new VerticalConstraint(0, courtY, courtY + courtSize, 'red');
 
-    const menuX = 910;
-    const menuY = 100;
-    const menuStep = 50;
-
     // radio to select which rotation to use
     let rotationRadioTitle = createP('Rotazione');
-    rotationRadioTitle.position(menuX, menuY - 40)
+    rotationRadioTitle.parent("rotation_menu_title");
 
     rotationRadio = createRadio();
-    rotationRadio.position(menuX, menuY);
+    rotationRadio.parent("rotation_menu_options");
 
     rotationRadio.option("0", 'p1');
     rotationRadio.option("1", 'p2');
@@ -135,10 +131,10 @@ function setup() {
 
     // radio to select the formation for the current rotation
     let formationRadioTitle = createP('Formazione');
-    formationRadioTitle.position(menuX, menuY + menuStep - 40);
+    formationRadioTitle.parent("formation_menu_title");
 
     formationRadio = createRadio();
-    formationRadio.position(menuX, menuY + menuStep);
+    formationRadio.parent("formation_menu_options");
 
     formationRadio.option("base", 'Base');
     formationRadio.option("receive", 'Ricezione');
@@ -150,10 +146,10 @@ function setup() {
 
     // radio to select which version of the court to display: normal, divided in zones, or without any lines
     let courtRadioTitle = createP('Tipo di Campo');
-    courtRadioTitle.position(menuX, menuY + 2 * menuStep - 40);
+    courtRadioTitle.parent("court_menu_title");
 
     courtRadio = createRadio();
-    courtRadio.position(menuX, menuY + 2 * menuStep);
+    courtRadio.parent("court_menu_options");
 
     courtRadio.option("normal", 'Normale');
     courtRadio.option("zones", 'Zone');
@@ -163,10 +159,10 @@ function setup() {
 
     // radio to select which version of the court to display: normal, divided in zones, or without any lines
     let constraintsRadioTitle = createP('Limiti di Posizione');
-    constraintsRadioTitle.position(menuX, menuY + 3 * menuStep - 40);
+    constraintsRadioTitle.parent("constraint_menu_title");
 
     constraintsRadio = createRadio();
-    constraintsRadio.position(menuX, menuY + 3 * menuStep);
+    constraintsRadio.parent("constraint_menu_options");
 
     constraintsRadio.option("for", 'per il giocatore');
     constraintsRadio.option("from", 'dal giocatore');
@@ -176,10 +172,10 @@ function setup() {
 
     // radio to toggle the invalid color for the draggable players in positional foul
     let invalidColorRadioTitle = createP('Verifica Giocatori in Fallo di Posizione');
-    invalidColorRadioTitle.position(menuX, menuY + 4 * menuStep - 40);
+    invalidColorRadioTitle.parent("foul_menu_title");
 
     invalidColorRadio = createRadio();
-    invalidColorRadio.position(menuX, menuY + 4 * menuStep);
+    invalidColorRadio.parent("foul_menu_options");
 
     invalidColorRadio.option("enabled", 'Abilita');
     invalidColorRadio.option("disabled", 'Disabilita');
