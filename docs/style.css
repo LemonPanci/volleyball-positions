@@ -57,8 +57,7 @@ nav.header-item li {
     font-weight: bold;
 }
 
-#playground_menu {
-    position: absolute;
-    left: 910px;
-    top: 80px;
+main {
+    display: flex;
+    flex-wrap: wrap;
 }
