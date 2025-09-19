@@ -8,6 +8,45 @@ canvas {
     display: block;
 }
 
+header {
+    background-color: rgba(229, 122, 221, 1);
+    /* display: flex; */
+    height: 70px;
+    padding-left: 10px;
+    /* align-items: stretch; */
+}
+
+.header-item {
+    height: inherit;
+    float: left;
+    display: flex;
+    align-items: center;
+}
+
+#header-icon {
+    height: 50px;
+}
+
+#header-title {
+    margin: 0;
+}
+
+nav.header-item {
+    position: absolute;
+    left: 50vw;
+    transform: translateX(-50%);
+}
+
+nav.header-item ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav.header-item li {
+    float: left;
+}
+
 #playground_menu {
     position: absolute;
     left: 910px;
