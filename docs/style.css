@@ -57,6 +57,11 @@ nav.header-item li {
     font-weight: bold;
 }
 
+#instructions {
+    font-size: larger;
+    margin: 2rem;
+}
+
 main {
     display: flex;
     flex-wrap: wrap;
