@@ -61,3 +61,7 @@ main {
     display: flex;
     flex-wrap: wrap;
 }
+
+#playground_menu {
+    margin: 1rem;
+}
