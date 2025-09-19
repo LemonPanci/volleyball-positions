@@ -43,10 +43,18 @@ nav.header-item ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    height: inherit;
 }
 
 nav.header-item li {
     float: left;
+    height: inherit;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: larger;
+    font-weight: bold;
 }
 
 #playground_menu {
