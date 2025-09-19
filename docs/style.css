@@ -25,10 +25,12 @@ header {
 
 #header-icon {
     height: 50px;
+    /* margin: 10px; */
 }
 
 #header-title {
     margin: 0;
+    margin-left: 10px;
 }
 
 nav.header-item {
