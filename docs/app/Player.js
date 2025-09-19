@@ -8,7 +8,7 @@ class Player {
         this.color = "white";
         this.highlight = false;
         this.startingPosition = startingPosition;
-        this.startingPositionFlag = false;
+        this.startingPositionFlag = true;
     }
 
     display() {

@@ -182,7 +182,7 @@ function setup() {
     startingPositionRadio.option("enabled", 'Abilita');
     startingPositionRadio.option("disabled", 'Disabilita');
 
-    startingPositionRadio.selected("disabled");
+    startingPositionRadio.selected("enabled");
 
     startingPositionRadio.changed(setStartingPosition);
 }
