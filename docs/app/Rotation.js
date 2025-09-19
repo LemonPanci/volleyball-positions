@@ -31,12 +31,12 @@ class Rotation {
 
         const playerSize = courtSize / 6;
 
-        this.p1 = new Player(col3, row2, playerSize, roles[(0 + shift) % 6]);
-        this.p2 = new Player(col3, row1, playerSize, roles[(1 + shift) % 6]);
-        this.p3 = new Player(col2, row1, playerSize, roles[(2 + shift) % 6]);
-        this.p4 = new Player(col1, row1, playerSize, roles[(3 + shift) % 6]);
-        this.p5 = new Player(col1, row2, playerSize, roles[(4 + shift) % 6]);
-        this.p6 = new Player(col2, row2, playerSize, roles[(5 + shift) % 6]);
+        this.p1 = new Player(col3, row2, playerSize, roles[(0 + shift) % 6], 1);
+        this.p2 = new Player(col3, row1, playerSize, roles[(1 + shift) % 6], 2);
+        this.p3 = new Player(col2, row1, playerSize, roles[(2 + shift) % 6], 3);
+        this.p4 = new Player(col1, row1, playerSize, roles[(3 + shift) % 6], 4);
+        this.p5 = new Player(col1, row2, playerSize, roles[(4 + shift) % 6], 5);
+        this.p6 = new Player(col2, row2, playerSize, roles[(5 + shift) % 6], 6);
 
         this.p1p2 = true;
         this.p1p6 = true;
@@ -303,9 +303,21 @@ class Rotation {
         this.noInvalidColor = flag;
     }
 
-    highlightPlayerConstraint() {
-        // need to select player by position but also identify correctly in rotation
-        // different behaviours depending on which rotation slot it's in
-        // highlight vertical for same row, highlit horizontal for same column, highlight only adjacent
+    showStartingPositions() {
+        this.p1.showStartingPosition();
+        this.p2.showStartingPosition();
+        this.p3.showStartingPosition();
+        this.p4.showStartingPosition();
+        this.p5.showStartingPosition();
+        this.p6.showStartingPosition();
+    }
+
+    hideStartingPositions() {
+        this.p1.hideStartingPosition();
+        this.p2.hideStartingPosition();
+        this.p3.hideStartingPosition();
+        this.p4.hideStartingPosition();
+        this.p5.hideStartingPosition();
+        this.p6.hideStartingPosition();
     }
 }

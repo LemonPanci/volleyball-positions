@@ -1,5 +1,5 @@
 class Player {
-    constructor(x, y, size, role) {
+    constructor(x, y, size, role, startingPosition) {
         this.x = x;
         this.y = y;
         this.role = role;
@@ -7,6 +7,8 @@ class Player {
         this.textSize = size * 2 / 5;
         this.color = "white";
         this.highlight = false;
+        this.startingPosition = startingPosition;
+        this.startingPositionFlag = false;
     }
 
     display() {
@@ -18,6 +20,7 @@ class Player {
             strokeWeight(2)
         }
         circle(0, 0, this.size);
+
         stroke(0);
         strokeWeight(0);
         fill(0);
@@ -26,6 +29,11 @@ class Player {
             textStyle(BOLD);
         }
         text(this.role, 0, 0);
+
+        if (this.startingPositionFlag) {
+            textSize(this.textSize / 2);
+            text(this.startingPosition, 0, this.size / 3);
+        }
         pop();
     }
 
@@ -61,5 +69,17 @@ class Player {
 
     toggleHighlight() {
         this.highlight = !this.highlight;
+    }
+
+    showStartingPosition() {
+        this.startingPositionFlag = true;
+    }
+
+    hideStartingPosition() {
+        this.startingPositionFlag = false;
+    }
+
+    toggleStartingPosition() {
+        this.startingPositionFlag = !this.startingPositionFlag;
     }
 }

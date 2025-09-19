@@ -8,12 +8,13 @@ let defenseRotations;
 // Currently displayed draggable Rotation Object
 let currentRotation;
 // Inputs
+let resetButton;
 let rotationRadio;
 let courtRadio;
 let constraintsRadio;
 let formationRadio;
 let invalidColorRadio;
-let resetButton;
+let startingPositionRadio;
 // Number of the currently selected rotation
 let currentSelectedIndex;
 // Flag for disabling the coloring for players in invalid positions
@@ -170,6 +171,20 @@ function setup() {
     invalidColorRadio.selected("enabled");
 
     invalidColorRadio.changed(toggleInvalidColor);
+
+    // radio to toggle the display of the starting position under each player role
+    let startingPositionRadioTitle = createP('Mostra posizione di riferimento');
+    startingPositionRadioTitle.parent("starting_position_menu_title");
+
+    startingPositionRadio = createRadio();
+    startingPositionRadio.parent("starting_position_menu_options");
+
+    startingPositionRadio.option("enabled", 'Abilita');
+    startingPositionRadio.option("disabled", 'Disabilita');
+
+    startingPositionRadio.selected("disabled");
+
+    startingPositionRadio.changed(setStartingPosition);
 }
 
 function draw() {
@@ -361,4 +376,19 @@ function hideConstraintsFromDragged() {
     draggedPlayer.hideHighlight();
     constraints = [];
     priorityPlayers = [];
+}
+
+function setStartingPosition() {
+    switch (startingPositionRadio.value()) {
+        case "enabled":
+            draggableRotations.forEach(rotation => {
+                rotation.showStartingPositions();
+            });
+            return;
+        case "disabled":
+            draggableRotations.forEach(rotation => {
+                rotation.hideStartingPositions();
+            });
+            return;
+    }
 }
