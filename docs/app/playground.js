@@ -33,7 +33,10 @@ const validPlayerColor = "lightgreen";
 const invalidPlayerColor = "red";
 
 function setup() {
-    const canvasSize = Math.min(1 / 2 * windowWidth, 1 / 2 * windowHeight);
+    const canvasSize = Math.max(
+        600,
+        Math.min(1 / 2 * windowWidth, 1 / 2 * windowHeight)
+    );
     let canvas = createCanvas(canvasSize, canvasSize);
     canvas.parent("canvas");
     ellipseMode(CENTER);
