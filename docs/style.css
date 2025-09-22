@@ -49,12 +49,22 @@ nav.header-item ul {
 nav.header-item li {
     float: left;
     height: inherit;
+}
+
+nav.header-item a {
+    height: inherit;
     display: flex;
     align-items: center;
     padding-left: 1rem;
     padding-right: 1rem;
     font-size: larger;
     font-weight: bold;
+    text-decoration: none;
+    color: inherit;
+}
+
+nav.header-item a:hover {
+    background-color: rgb(243, 163, 207);
 }
 
 #instructions {
