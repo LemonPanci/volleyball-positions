@@ -70,3 +70,11 @@ main {
 #playground_menu {
     margin: 1rem;
 }
+
+#tutorial_instructions {
+    margin: 1rem;
+}
+
+#tutorial_canvas {
+    margin: auto;
+}
