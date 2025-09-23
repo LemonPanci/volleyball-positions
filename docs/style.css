@@ -70,11 +70,13 @@ nav.header-item a:hover {
 #instructions {
     font-size: larger;
     padding: 1.5rem;
+    text-align: center;
 }
 
 main {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 #playground_menu {
