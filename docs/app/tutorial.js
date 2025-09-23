@@ -106,13 +106,21 @@ function draw() {
     }
 }
 
-// on mouse click show/hide player constraint
+/**
+ * shows/hides constraints for the clicked player
+ * showConstriantsForPlayer() automatically hides constraints by removing them from the constraint list
+ */
 function mouseClicked() {
     priorityPlayers.forEach(current => {
         current.hideHighlight();
     });
     const selectedPlayer = selectPlayer(mouseX, mouseY, receiveRotations[currentSelectedIndex]);
-    showConstraintsForPlayer(selectedPlayer, receiveRotations[currentSelectedIndex]);
+    if (selectedPlayer && draggedPlayer && selectedPlayer.role === draggedPlayer.role) {
+        draggedPlayer = null;
+    } else {
+        draggedPlayer = selectedPlayer;
+    }
+    showConstraintsForPlayer(draggedPlayer, receiveRotations[currentSelectedIndex]);
 }
 
 function selectPlayer(x, y, rotation) {
@@ -120,7 +128,7 @@ function selectPlayer(x, y, rotation) {
 }
 
 function showConstraintsForPlayer(player, rotation) {
-    if (typeof player === 'undefined') {
+    if (!player) {
         priorityPlayers = [];
         constraints = [];
         return;
