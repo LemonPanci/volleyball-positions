@@ -127,6 +127,12 @@ function selectPlayer(x, y, rotation) {
     return rotation.getPlayerByPosition(x, y);
 }
 
+/**
+ * turns on highlight for player giving constraints,
+ * sets the correct constraint positions,
+ * adds them to the list of constraints to be displayed,
+ * and adds the relevant player to the priority display list
+ */
 function showConstraintsForPlayer(player, rotation) {
     if (!player) {
         priorityPlayers = [];
