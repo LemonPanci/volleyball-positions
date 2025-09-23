@@ -72,10 +72,10 @@ function setup() {
 
     // radio to select which rotation to use
     let rotationRadioTitle = createP('Rotazione');
-    // rotationRadioTitle.parent("rotation_menu_title");
+    rotationRadioTitle.parent("rotation_menu_title");
 
     rotationRadio = createRadio();
-    // rotationRadio.parent("rotation_menu_options");
+    rotationRadio.parent("rotation_menu_options");
 
     rotationRadio.option("0", 'p1');
     rotationRadio.option("1", 'p2');
