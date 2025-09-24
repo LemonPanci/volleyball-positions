@@ -27,7 +27,7 @@ const invalidPlayerColor = "red";
 const courtTitleSize = 30;
 
 function setup() {
-    const canvasSize = windowWidth / 3;
+    const canvasSize = Math.min(windowWidth / 3, windowHeight * 3 / 5);
     let canvas = createCanvas(3 * canvasSize, canvasSize + courtTitleSize);
     canvas.parent("tutorial_canvas");
     ellipseMode(CENTER);
