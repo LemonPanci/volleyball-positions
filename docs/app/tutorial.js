@@ -37,7 +37,6 @@ function setup() {
     ];
 
     const canvasPadding = 10;
-    // set up court and rotations for the draggable part
     const courtSize = canvasSize - 2 * canvasPadding;
     const courtX = canvasPadding;
     const courtY = canvasPadding;
