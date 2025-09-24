@@ -67,7 +67,7 @@ nav.header-item a:hover {
     background-color: rgb(243, 163, 207);
 }
 
-#instructions {
+#playground_instructions {
     font-size: larger;
     padding: 1.5rem;
     text-align: center;
