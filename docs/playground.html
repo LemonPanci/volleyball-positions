@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Posizioni Pallavolo - Tutorial</title>
+  <title>Posizioni Pallavolo</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/addons/p5.sound.min.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
@@ -26,25 +26,40 @@
       </ul>
     </nav>
   </header>
-  <p id="tutorial_instructions">
-    <b>Al momento del servizio</b> la posizione di ogni giocatore è limitata dalla posizione dei compagni adiacenti
-    rispetto alla griglia di partenza.<br>
-    Questo significa non potersi spostare più a sinistra o a destra dei compagni sulla stessa linea e non poter andare
-    più avanti o più indietro del compagno nella stessa colonna.<br>
-    Questo significa anche che non importa se invece vengono superati i compagni che sulla griglia si trovano
-    diagonalmente o nell'angolo opposto.<br>
-    Tocca i giocatori per vedere da chi è limitato in che modo.
-  </p>
-  <main class="tutorial">
-    <div id="tutorial_canvas"></div>
-    <div id="tutorial_menu">
+  <div id="playground_instructions">
+    Trascina i giocatori per vedere quando si trovano in fallo di posizione durante il servizio.
+  </div>
+  <main class="playground">
+    <div id="playground_canvas"></div>
+    <div id="playground_menu">
+      <div id="reset_button"></div>
       <div id="rotation_menu">
         <div id="rotation_menu_title"></div>
         <div id="rotation_menu_options"></div>
       </div>
+      <div id="formation_menu">
+        <div id="formation_menu_title"></div>
+        <div id="formation_menu_options"></div>
+      </div>
+      <div id="court_menu">
+        <div id="court_menu_title"></div>
+        <div id="court_menu_options"></div>
+      </div>
+      <div id="constraint_menu">
+        <div id="constraint_menu_title"></div>
+        <div id="constraint_menu_options"></div>
+      </div>
+      <div id="foul_menu">
+        <div id="foul_menu_title"></div>
+        <div id="foul_menu_options"></div>
+      </div>
+      <div id="starting_position_menu">
+        <div id="starting_position_menu_title"></div>
+        <div id="starting_position_menu_options"></div>
+      </div>
     </div>
   </main>
-  <script src="./app/tutorial.js"></script>
+  <script src="./app/playground.js"></script>
   <script src="./app/Player.js"></script>
   <script src="./app/Court.js"></script>
   <script src="./app/Zones.js"></script>

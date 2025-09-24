@@ -49,24 +49,49 @@ nav.header-item ul {
 nav.header-item li {
     float: left;
     height: inherit;
+}
+
+nav.header-item a {
+    height: inherit;
     display: flex;
     align-items: center;
     padding-left: 1rem;
     padding-right: 1rem;
     font-size: larger;
     font-weight: bold;
+    text-decoration: none;
+    color: inherit;
 }
 
-#instructions {
+nav.header-item a:hover {
+    background-color: rgb(243, 163, 207);
+}
+
+#playground_instructions {
     font-size: larger;
-    margin: 2rem;
+    padding: 1.5rem;
+    text-align: center;
 }
 
 main {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+}
+
+main.tutorial {
+    flex-direction: column-reverse;
+    align-items: center;
 }
 
 #playground_menu {
     margin: 1rem;
+}
+
+#tutorial_instructions {
+    margin: 1rem;
+}
+
+#tutorial_canvas {
+    margin: auto;
 }
