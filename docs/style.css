@@ -79,6 +79,11 @@ main {
     justify-content: center;
 }
 
+main.tutorial {
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
 #playground_menu {
     margin: 1rem;
 }
