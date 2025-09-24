@@ -90,6 +90,7 @@ main.tutorial {
 
 #tutorial_instructions {
     margin: 1rem;
+    font-size: large;
 }
 
 #tutorial_canvas {
