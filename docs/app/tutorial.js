@@ -1,17 +1,17 @@
 // Court Objects
 let receiveCourt;
 let referenceCourt;
+let defenseCourt;
 // Lists of Rotation Objects
 let referenceRotations;
 let receiveRotations;
+let defenseRotations;
 // Inputs
 let rotationRadio;
 let constraintsRadio;
 let startingPositionRadio;
 // Number of the currently selected rotation
 let currentSelectedIndex;
-// Flag for disabling the coloring for players in invalid positions
-let disableInvalidColorFlag = false;
 // list of players to be drawn on the top layer (above the constraint lines)
 let priorityPlayers = [];
 // Player Object currently being dragged
@@ -26,8 +26,8 @@ const validPlayerColor = "lightgreen";
 const invalidPlayerColor = "red";
 
 function setup() {
-    const canvasSize = 500;
-    let canvas = createCanvas(2 * canvasSize, canvasSize);
+    const canvasSize = windowWidth / 3;
+    let canvas = createCanvas(3 * canvasSize, canvasSize);
     canvas.parent("tutorial_canvas");
     ellipseMode(CENTER);
     textAlign(CENTER, CENTER);
@@ -65,6 +65,17 @@ function setup() {
         getReceiveP6(offsetCourtX, courtY, courtSize, roles)
     ];
 
+    const doubleOffsetCourtX = offsetCourtX + courtSize + 2 * canvasPadding;
+    defenseCourt = new Court(doubleOffsetCourtX, courtY, courtSize);
+    defenseRotations = [
+        getNeutralDefenseP1(doubleOffsetCourtX, courtY, courtSize, roles),
+        getNeutralDefenseP2(doubleOffsetCourtX, courtY, courtSize, roles),
+        getNeutralDefenseP3(doubleOffsetCourtX, courtY, courtSize, roles),
+        getNeutralDefenseP4(doubleOffsetCourtX, courtY, courtSize, roles),
+        getNeutralDefenseP5(doubleOffsetCourtX, courtY, courtSize, roles),
+        getNeutralDefenseP6(doubleOffsetCourtX, courtY, courtSize, roles)
+    ];
+
     // constraint lines
     horizontalConstraint = new HorizontalConstraint(offsetCourtX, offsetCourtX + courtSize, 0, 'red');
     verticalConstraint1 = new VerticalConstraint(0, courtY, courtY + courtSize, 'red');
@@ -92,10 +103,12 @@ function draw() {
 
     referenceCourt.display();
     receiveCourt.display();
+    defenseCourt.display();
 
     currentSelectedIndex = Number(rotationRadio.value());
     referenceRotations[currentSelectedIndex].display();
     receiveRotations[currentSelectedIndex].display();
+    defenseRotations[currentSelectedIndex].display();
 
     for (let i = 0; i < constraints.length; ++i) {
         constraints[i].display();
