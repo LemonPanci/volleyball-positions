@@ -129,3 +129,15 @@ function getNeutralDefenseP6(x, y, courtSize, roles) {
     formation_p6.updateCourtPositionByIndex(5, 4 / 5 * courtSize, 3 / 5 * courtSize);
     return formation_p6;
 }
+
+// this variant keeps A1 and O in their starting positions instead of swapping after the receive
+function getNoFrontSwapDefenseP1(x, y, courtSize, roles) {
+    const formation_p1 = new Rotation(x, y, courtSize, roles, 0, true);
+    formation_p1.updateCourtPositionByIndex(0, 4 / 5 * courtSize, 3 / 5 * courtSize);
+    formation_p1.updateCourtPositionByIndex(3, 1 / 6 * courtSize, 1 / 4 * courtSize);
+    formation_p1.updateCourtPositionByIndex(2, 1 / 2 * courtSize, 1 / 10 * courtSize);
+    formation_p1.updateCourtPositionByIndex(1, 5 / 6 * courtSize, 1 / 4 * courtSize);
+    formation_p1.updateCourtPositionByIndex(4, 1 / 2 * courtSize, 3 / 4 * courtSize);
+    formation_p1.updateCourtPositionByIndex(5, 1 / 5 * courtSize, 3 / 5 * courtSize);
+    return formation_p1;
+}
