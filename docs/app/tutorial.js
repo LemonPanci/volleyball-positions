@@ -15,7 +15,7 @@ let currentSelectedIndex;
 // list of players to be drawn on the top layer (above the constraint lines)
 let priorityPlayers = [];
 // Player Object currently being dragged
-let draggedPlayer = null;
+let selectedPlayer = null;
 // Constraint Objects
 let verticalConstraint1;
 let verticalConstraint2;
@@ -127,13 +127,13 @@ function mouseClicked() {
     priorityPlayers.forEach(current => {
         current.hideHighlight();
     });
-    const selectedPlayer = selectPlayer(mouseX, mouseY, receiveRotations[currentSelectedIndex]);
-    if (selectedPlayer && draggedPlayer && selectedPlayer.role === draggedPlayer.role) {
-        draggedPlayer = null;
+    const candidatePlayer = selectPlayer(mouseX, mouseY, receiveRotations[currentSelectedIndex]);
+    if (candidatePlayer && selectedPlayer && candidatePlayer.role === selectedPlayer.role) {
+        selectedPlayer = null;
     } else {
-        draggedPlayer = selectedPlayer;
+        selectedPlayer = candidatePlayer;
     }
-    showConstraintsForPlayer(draggedPlayer, receiveRotations[currentSelectedIndex]);
+    showConstraintsForPlayer(selectedPlayer, receiveRotations[currentSelectedIndex]);
 }
 
 function selectPlayer(x, y, rotation) {
