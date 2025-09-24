@@ -68,7 +68,7 @@ function setup() {
     const doubleOffsetCourtX = offsetCourtX + courtSize + 2 * canvasPadding;
     defenseCourt = new Court(doubleOffsetCourtX, courtY, courtSize);
     defenseRotations = [
-        getNeutralDefenseP1(doubleOffsetCourtX, courtY, courtSize, roles),
+        getNoFrontSwapDefenseP1(doubleOffsetCourtX, courtY, courtSize, roles),
         getNeutralDefenseP2(doubleOffsetCourtX, courtY, courtSize, roles),
         getNeutralDefenseP3(doubleOffsetCourtX, courtY, courtSize, roles),
         getNeutralDefenseP4(doubleOffsetCourtX, courtY, courtSize, roles),
