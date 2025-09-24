@@ -24,10 +24,11 @@ let constraints = [];
 // some configs
 const validPlayerColor = "lightgreen";
 const invalidPlayerColor = "red";
+const courtTitleSize = 30;
 
 function setup() {
     const canvasSize = windowWidth / 3;
-    let canvas = createCanvas(3 * canvasSize, canvasSize);
+    let canvas = createCanvas(3 * canvasSize, canvasSize + courtTitleSize);
     canvas.parent("tutorial_canvas");
     ellipseMode(CENTER);
     textAlign(CENTER, CENTER);
@@ -39,7 +40,7 @@ function setup() {
     const canvasPadding = 10;
     const courtSize = canvasSize - 2 * canvasPadding;
     const courtX = canvasPadding;
-    const courtY = canvasPadding;
+    const courtY = canvasPadding + courtTitleSize;
 
     // set up reference rotations
     referenceCourt = new Court(courtX, courtY, courtSize, "zones");
@@ -99,6 +100,28 @@ function setup() {
 
 function draw() {
     background('white');
+
+    // court titles
+    push();
+    textAlign(LEFT, BOTTOM);
+    textSize(courtTitleSize);
+    textStyle(BOLD);
+    text('Riferimento', referenceCourt.x, referenceCourt.y);
+    pop();
+
+    push();
+    textAlign(LEFT, BOTTOM);
+    textSize(courtTitleSize);
+    textStyle(BOLD);
+    text('Ricezione', receiveCourt.x, receiveCourt.y);
+    pop();
+
+    push();
+    textAlign(LEFT, BOTTOM);
+    textSize(courtTitleSize);
+    textStyle(BOLD);
+    text('Difesa', defenseCourt.x, defenseCourt.y);
+    pop();
 
     referenceCourt.display();
     receiveCourt.display();
