@@ -125,13 +125,21 @@ function draw() {
  */
 function mouseClicked() {
     priorityPlayers.forEach(current => {
-        current.hideHighlight();
+        current.hideConstraintHighlight();
     });
+    if (selectedPlayer) {
+        hideSelectedHighlightFromRotation(referenceRotations[currentSelectedIndex]);
+        hideSelectedHighlightFromRotation(receiveRotations[currentSelectedIndex]);
+        hideSelectedHighlightFromRotation(defenseRotations[currentSelectedIndex]);
+    }
     const candidatePlayer = selectPlayer(mouseX, mouseY, receiveRotations[currentSelectedIndex]);
-    if (candidatePlayer && selectedPlayer && candidatePlayer.role === selectedPlayer.role) {
+    if (!candidatePlayer || candidatePlayer && selectedPlayer && candidatePlayer.role === selectedPlayer.role) {
         selectedPlayer = null;
     } else {
         selectedPlayer = candidatePlayer;
+        referenceRotations[currentSelectedIndex].getPlayerByRole(selectedPlayer.role).showSelectedHighlight();
+        receiveRotations[currentSelectedIndex].getPlayerByRole(selectedPlayer.role).showSelectedHighlight();
+        defenseRotations[currentSelectedIndex].getPlayerByRole(selectedPlayer.role).showSelectedHighlight();
     }
     showConstraintsForPlayer(selectedPlayer, receiveRotations[currentSelectedIndex]);
 }
@@ -175,8 +183,8 @@ function showConstraintsForPlayer(player, rotation) {
             verticalConstraint1.setX(previous.x);
             horizontalConstraint.setY(next.y);
             constraints = [verticalConstraint1, horizontalConstraint];
-            previous.showHighlight();
-            next.showHighlight();
+            previous.showConstraintHighlight();
+            next.showConstraintHighlight();
             priorityPlayers = [previous, next, player];
             return;
         // players in position 2 and 5
@@ -185,8 +193,8 @@ function showConstraintsForPlayer(player, rotation) {
             horizontalConstraint.setY(previous.y)
             verticalConstraint1.setX(next.x);
             constraints = [verticalConstraint1, horizontalConstraint];
-            previous.showHighlight();
-            next.showHighlight();
+            previous.showConstraintHighlight();
+            next.showConstraintHighlight();
             priorityPlayers = [previous, next, player];
             return;
         // players in position 3 and 6
@@ -196,10 +204,16 @@ function showConstraintsForPlayer(player, rotation) {
             verticalConstraint2.setX(next.x);
             horizontalConstraint.setY(opposite.y);
             constraints = [verticalConstraint1, verticalConstraint2, horizontalConstraint];
-            previous.showHighlight();
-            next.showHighlight();
-            opposite.showHighlight();
+            previous.showConstraintHighlight();
+            next.showConstraintHighlight();
+            opposite.showConstraintHighlight();
             priorityPlayers = [previous, next, opposite, player];
             return;
+    }
+}
+
+function hideSelectedHighlightFromRotation(rotation) {
+    for (let i = 0; i < 6; ++i) {
+        rotation.getPlayerByIndex(i).hideSelectedHighlight();
     }
 }

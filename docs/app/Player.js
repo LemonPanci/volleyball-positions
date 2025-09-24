@@ -6,7 +6,8 @@ class Player {
         this.size = size;
         this.textSize = size * 2 / 5;
         this.color = "white";
-        this.highlight = false;
+        this.constraintHighlight = false;
+        this.selectedHighlight = false;
         this.startingPosition = startingPosition;
         this.startingPositionFlag = true;
     }
@@ -15,9 +16,13 @@ class Player {
         push();
         translate(this.x, this.y);
         fill(this.color);
-        if (this.highlight) {
+        if (this.constraintHighlight) {
             stroke('red');
             strokeWeight(2)
+        }
+        if (this.selectedHighlight) {
+            stroke('blue');
+            strokeWeight(5);
         }
         circle(0, 0, this.size);
 
@@ -55,20 +60,36 @@ class Player {
         this.color = color;
     }
 
-    setHighlight(bool) {
-        this.highlight = bool;
+    setConstraintHighlight(bool) {
+        this.constraintHighlight = bool;
     }
 
-    showHighlight() {
-        this.highlight = true;
+    showConstraintHighlight() {
+        this.constraintHighlight = true;
     }
 
-    hideHighlight() {
-        this.highlight = false;
+    hideConstraintHighlight() {
+        this.constraintHighlight = false;
     }
 
-    toggleHighlight() {
-        this.highlight = !this.highlight;
+    toggleConstraintHighlight() {
+        this.constraintHighlight = !this.constraintHighlight;
+    }
+
+    setSelectedHighlight(bool) {
+        this.selectedHighlight = bool;
+    }
+
+    showSelectedHighlight() {
+        this.selectedHighlight = true;
+    }
+
+    hideSelectedHighlight() {
+        this.selectedHighlight = false;
+    }
+
+    toggleSelectedHighlight() {
+        this.selectedHighlight = !this.selectedHighlight;
     }
 
     showStartingPosition() {
