@@ -137,7 +137,19 @@ function mouseClicked() {
 }
 
 function selectPlayer(x, y, rotation) {
-    return rotation.getPlayerByPosition(x, y);
+    const selectedReference = referenceRotations[currentSelectedIndex].getPlayerByPosition(x, y);
+    const selectedReceive = receiveRotations[currentSelectedIndex].getPlayerByPosition(x, y);
+    const selectedDefense = defenseRotations[currentSelectedIndex].getPlayerByPosition(x, y);
+
+    if (selectedReference) {
+        return rotation.getPlayerByRole(selectedReference.role);
+    }
+    if (selectedReceive) {
+        return rotation.getPlayerByRole(selectedReceive.role);
+    }
+    if (selectedDefense) {
+        return rotation.getPlayerByRole(selectedDefense.role);
+    }
 }
 
 /**
