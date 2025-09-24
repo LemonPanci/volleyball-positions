@@ -102,26 +102,9 @@ function draw() {
     background('white');
 
     // court titles
-    push();
-    textAlign(LEFT, BOTTOM);
-    textSize(courtTitleSize);
-    textStyle(BOLD);
-    text('Riferimento', referenceCourt.x, referenceCourt.y);
-    pop();
-
-    push();
-    textAlign(LEFT, BOTTOM);
-    textSize(courtTitleSize);
-    textStyle(BOLD);
-    text('Ricezione', receiveCourt.x, receiveCourt.y);
-    pop();
-
-    push();
-    textAlign(LEFT, BOTTOM);
-    textSize(courtTitleSize);
-    textStyle(BOLD);
-    text('Difesa', defenseCourt.x, defenseCourt.y);
-    pop();
+    displayCourtTitle('Riferimento', referenceCourt);
+    displayCourtTitle('Ricezione', receiveCourt);
+    displayCourtTitle('Difesa', defenseCourt);
 
     referenceCourt.display();
     receiveCourt.display();
@@ -238,4 +221,13 @@ function hideSelectedHighlightFromRotation(rotation) {
     for (let i = 0; i < 6; ++i) {
         rotation.getPlayerByIndex(i).hideSelectedHighlight();
     }
+}
+
+function displayCourtTitle(title, court) {
+    push();
+    textAlign(LEFT, BOTTOM);
+    textSize(courtTitleSize);
+    textStyle(BOLD);
+    text(title, court.x, court.y);
+    pop();
 }
