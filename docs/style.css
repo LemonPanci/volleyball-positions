@@ -96,3 +96,7 @@ main.tutorial {
 #tutorial_canvas {
     margin: auto;
 }
+
+#tutorial_menu p {
+    margin-top: 0;
+}
