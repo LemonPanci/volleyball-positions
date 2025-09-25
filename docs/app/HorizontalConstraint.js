@@ -24,4 +24,8 @@ class HorizontalConstraint {
     setY(y) {
         this.y = y;
     }
+
+    setToPlayer(player) {
+        this.setY(player.y);
+    }
 }

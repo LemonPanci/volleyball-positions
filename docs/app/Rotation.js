@@ -171,6 +171,7 @@ class Rotation {
                 return currentPlayer;
             }
         }
+        return null;
     }
 
     getIndexByPosition(x, y) {
@@ -182,6 +183,15 @@ class Rotation {
         }
     }
 
+    getRoleByPosition(x, y) {
+        for (let i = 5; i >= 0; i--) {
+            let currentPlayer = this.getPlayerByIndex(i);
+            if (currentPlayer.isInside(x, y)) {
+                return currentPlayer.role;
+            }
+        }
+    }
+
     getPlayerByRole(role) {
         for (let i = 5; i >= 0; i--) {
             let currentPlayer = this.getPlayerByIndex(i);
@@ -189,6 +199,7 @@ class Rotation {
                 return currentPlayer;
             }
         }
+        return null;
     }
 
     getIndexByRole(role) {
@@ -320,4 +331,78 @@ class Rotation {
         this.p5.hideStartingPosition();
         this.p6.hideStartingPosition();
     }
+
+    showSelectedHighlightByIndex(index) {
+        const player = this.getPlayerByIndex(index);
+        if (player) {
+            player.showSelectedHighlight();
+        }
+    }
+
+    hideSelectedHighlightByIndex(index) {
+        const player = this.getPlayerByIndex(index);
+        if (player) {
+            player.hideSelectedHighlight();
+        }
+    }
+
+    showSelectedHighlightByRole(role) {
+        const player = this.getPlayerByRole(role);
+        if (player) {
+            player.showSelectedHighlight();
+        }
+    }
+
+    hideSelectedHighlightByRole(role) {
+        const player = this.getPlayerByRole(role);
+        if (player) {
+            player.hideSelectedHighlight();
+        }
+    }
+
+    hideAllSelectedHighlights() {
+        for (let i = 5; i >= 0; --i) {
+            this.hideSelectedHighlightByIndex(i);
+        }
+    }
+
+    showConstraintHighlightByIndex(index) {
+        const player = this.getPlayerByIndex(index);
+        if (player) {
+            player.showConstraintHighlight();
+        }
+    }
+
+    hideConstraintHighlightByIndex(index) {
+        const player = this.getPlayerByIndex(index);
+        if (player) {
+            player.hideConstraintHighlight();
+        }
+    }
+
+    showConstraintHighlightByRole(role) {
+        const player = this.getPlayerByRole(role);
+        if (player) {
+            player.showConstraintHighlight();
+        }
+    }
+
+    hideConstraintHighlightByRole(role) {
+        const player = this.getPlayerByRole(role);
+        if (player) {
+            player.hideConstraintHighlight();
+        }
+    }
+
+    hideAllConstraintHighlights() {
+        for (let i = 5; i >= 0; --i) {
+            this.hideConstraintHighlightByIndex(i);
+        }
+    }
+
+    // forEach(fn) {
+    //     for (let i = 5; i >= 0; --i) {
+    //         fn(this.getPlayerByIndex(i));
+    //     }
+    // }
 }

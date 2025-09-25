@@ -11,11 +11,11 @@ let rotationRadio;
 let constraintsRadio;
 let startingPositionRadio;
 // Number of the currently selected rotation
-let currentSelectedIndex;
+let currentSelectedIndex = 0;
 // list of players to be drawn on the top layer (above the constraint lines)
 let priorityPlayers = [];
 // Player Object currently being dragged
-let selectedPlayer = null;
+let selectedRole;
 // Constraint Objects
 let verticalConstraint1;
 let verticalConstraint2;
@@ -97,77 +97,123 @@ function setup() {
 
     rotationRadio.selected("0");
 
-    rotationRadio.changed(forwardSelection);
+    rotationRadio.changed(onRotationChange);
+
+    repaint();
 }
 
-function draw() {
+function repaint() {
     background('white');
 
-    // court titles
+    // draw court titles
     displayCourtTitle('Riferimento', referenceCourt);
     displayCourtTitle('Ricezione', receiveCourt);
     displayCourtTitle('Difesa', defenseCourt);
 
+    // draw courts
     referenceCourt.display();
     receiveCourt.display();
     defenseCourt.display();
 
-    currentSelectedIndex = Number(rotationRadio.value());
+    // draw players from the currently selected rotation
     referenceRotations[currentSelectedIndex].display();
     receiveRotations[currentSelectedIndex].display();
     defenseRotations[currentSelectedIndex].display();
 
-    for (let i = 0; i < constraints.length; ++i) {
-        constraints[i].display();
-    }
+    // draw constraint lines, if any
+    constraints.forEach(constraint => constraint.display());
 
-    for (let i = 0; i < priorityPlayers.length; ++i) {
-        priorityPlayers[i].display();
-    }
+    // draw highlighted players, if any
+    priorityPlayers.forEach(player => player.display());
+}
+
+// Writes a label/title above the top left corner of the provided court
+function displayCourtTitle(title, court) {
+    push();
+    textAlign(LEFT, BOTTOM);
+    textSize(courtTitleSize);
+    textStyle(BOLD);
+    text(title, court.x, court.y);
+    pop();
 }
 
 /**
- * shows/hides constraints for the clicked player
- * showConstriantsForPlayer() automatically hides constraints by removing them from the constraint list
+ * highlights the clicked role in all 3 courts
+ * updates the constraint for the player in the receive court
+ * repaints the canvas
  */
 function mouseClicked() {
     if (mouseY < 0) {
+        // prevent changes when clicking the rotation radio, in order to keep selection across different rotations
         return;
     }
-    priorityPlayers.forEach(current => {
-        current.hideConstraintHighlight();
-    });
-    if (selectedPlayer) {
-        hideSelectedHighlightFromRotation(referenceRotations[currentSelectedIndex]);
-        hideSelectedHighlightFromRotation(receiveRotations[currentSelectedIndex]);
-        hideSelectedHighlightFromRotation(defenseRotations[currentSelectedIndex]);
-    }
-    const candidatePlayer = selectPlayer(mouseX, mouseY, receiveRotations[currentSelectedIndex]);
-    if (!candidatePlayer || candidatePlayer && selectedPlayer && candidatePlayer.role === selectedPlayer.role) {
-        selectedPlayer = null;
-    } else {
-        selectedPlayer = candidatePlayer;
-        referenceRotations[currentSelectedIndex].getPlayerByRole(selectedPlayer.role).showSelectedHighlight();
-        receiveRotations[currentSelectedIndex].getPlayerByRole(selectedPlayer.role).showSelectedHighlight();
-        defenseRotations[currentSelectedIndex].getPlayerByRole(selectedPlayer.role).showSelectedHighlight();
-    }
-    showConstraintsForPlayer(selectedPlayer, receiveRotations[currentSelectedIndex]);
+    const candidateRole = getRoleByPosition(mouseX, mouseY);
+    updateSelectedRole(candidateRole);
+    updateConstraintsForRole(selectedRole, receiveRotations[currentSelectedIndex]);
+    repaint();
 }
 
-function selectPlayer(x, y, rotation) {
-    const selectedReference = referenceRotations[currentSelectedIndex].getPlayerByPosition(x, y);
-    const selectedReceive = receiveRotations[currentSelectedIndex].getPlayerByPosition(x, y);
-    const selectedDefense = defenseRotations[currentSelectedIndex].getPlayerByPosition(x, y);
+/**
+ * updates the rotation index
+ * updates the constraint for the player in the changed rotation
+ * repaints the canvas
+ */
+function onRotationChange() {
+    currentSelectedIndex = Number(rotationRadio.value());
+    updateConstraintsForRole(selectedRole, receiveRotations[currentSelectedIndex]);
+    repaint();
+}
 
-    if (selectedReference) {
-        return rotation.getPlayerByRole(selectedReference.role);
+// returns the role for the player in the rotation at the position, if any
+function getRoleInRotationByPosition(x, y, rotation) {
+    return rotation.getRoleByPosition(x, y);
+}
+
+// returns the role of the player at the position on any of the 3 courts
+function getRoleByPosition(x, y) {
+    let role = getRoleInRotationByPosition(x, y, referenceRotations[currentSelectedIndex]);
+    if (role) {
+        return role;
     }
-    if (selectedReceive) {
-        return rotation.getPlayerByRole(selectedReceive.role);
+    role = getRoleInRotationByPosition(x, y, receiveRotations[currentSelectedIndex]);
+    if (role) {
+        return role;
     }
-    if (selectedDefense) {
-        return rotation.getPlayerByRole(selectedDefense.role);
+    role = getRoleInRotationByPosition(x, y, defenseRotations[currentSelectedIndex]);
+    if (role) {
+        return role;
     }
+}
+
+// sets selectedRole to a new role, or deselects it if already selected
+function updateSelectedRole(candidate) {
+    hideSelectedHighlightsGlobally();
+    if (!candidate || candidate && selectedRole && candidate === selectedRole) {
+        selectedRole = undefined;
+    } else {
+        selectedRole = candidate;
+    }
+    showSelectedHighlightsGlobally();
+}
+
+// set the selectedHighlight flag to true for a specified role across all rotations and rotations
+function showSelectedHighlightsGlobally() {
+    referenceRotations.forEach(rotation => rotation.showSelectedHighlightByRole(selectedRole));
+    receiveRotations.forEach(rotation => rotation.showSelectedHighlightByRole(selectedRole));
+    defenseRotations.forEach(rotation => rotation.showSelectedHighlightByRole(selectedRole));
+}
+
+// set the selectedHighlight flag to false for a specified role across all rotations and rotations
+function hideSelectedHighlightsGlobally() {
+    referenceRotations.forEach(rotation => rotation.hideAllSelectedHighlights());
+    receiveRotations.forEach(rotation => rotation.hideAllSelectedHighlights());
+    defenseRotations.forEach(rotation => rotation.hideAllSelectedHighlights());
+}
+
+// wrapper to call updateConstraintsForPlayer deriving the player from the given role
+function updateConstraintsForRole(role, rotation) {
+    const player = rotation.getPlayerByRole(role);
+    updateConstraintsForPlayer(player, rotation);
 }
 
 /**
@@ -175,11 +221,12 @@ function selectPlayer(x, y, rotation) {
  * sets the correct constraint positions,
  * adds them to the list of constraints to be displayed,
  * and adds the relevant player to the priority display list
+ * 
+ * The function assumes that the player belongs to the provided rotation
  */
-function showConstraintsForPlayer(player, rotation) {
+function updateConstraintsForPlayer(player, rotation) {
+    clearConstraints();
     if (!player) {
-        priorityPlayers = [];
-        constraints = [];
         return;
     }
     const playerIndex = rotation.getIndexByRole(player.role);
@@ -190,71 +237,37 @@ function showConstraintsForPlayer(player, rotation) {
         // players in position 1 and 4
         case 0:
         case 3:
-            verticalConstraint1.setX(previous.x);
-            horizontalConstraint.setY(next.y);
-            constraints = [verticalConstraint1, horizontalConstraint];
-            previous.showConstraintHighlight();
-            next.showConstraintHighlight();
-            priorityPlayers = [previous, next, player];
-            return;
+            attachConstraintToPlayer(verticalConstraint1, previous);
+            attachConstraintToPlayer(horizontalConstraint, next);
+            break;
         // players in position 2 and 5
         case 1:
         case 4:
-            horizontalConstraint.setY(previous.y)
-            verticalConstraint1.setX(next.x);
-            constraints = [verticalConstraint1, horizontalConstraint];
-            previous.showConstraintHighlight();
-            next.showConstraintHighlight();
-            priorityPlayers = [previous, next, player];
-            return;
+            attachConstraintToPlayer(horizontalConstraint, previous);
+            attachConstraintToPlayer(verticalConstraint1, next);
+            break;
         // players in position 3 and 6
         case 2:
         case 5:
-            verticalConstraint1.setX(previous.x);
-            verticalConstraint2.setX(next.x);
-            horizontalConstraint.setY(opposite.y);
-            constraints = [verticalConstraint1, verticalConstraint2, horizontalConstraint];
-            previous.showConstraintHighlight();
-            next.showConstraintHighlight();
-            opposite.showConstraintHighlight();
-            priorityPlayers = [previous, next, opposite, player];
-            return;
+            attachConstraintToPlayer(verticalConstraint1, previous);
+            attachConstraintToPlayer(verticalConstraint2, next);
+            attachConstraintToPlayer(horizontalConstraint, opposite);
+            break;
     }
+    priorityPlayers.push(player);
 }
 
-function hideSelectedHighlightFromRotation(rotation) {
-    for (let i = 0; i < 6; ++i) {
-        rotation.getPlayerByIndex(i).hideSelectedHighlight();
-    }
+function attachConstraintToPlayer(constraint, player) {
+    constraint.setToPlayer(player);
+    constraints.push(constraint);
+    player.showConstraintHighlight();
+    priorityPlayers.push(player);
 }
 
-// to be called by rotationRadio.changed() with the goal to highlight the previosuly selected player and constraint in the new rotation
-function forwardSelection() {
-    if (!selectedPlayer) {
-        return;
-    }
+function clearConstraints() {
     priorityPlayers.forEach(current => {
         current.hideConstraintHighlight();
     });
-    hideSelectedHighlightFromRotation(referenceRotations[currentSelectedIndex]);
-    hideSelectedHighlightFromRotation(receiveRotations[currentSelectedIndex]);
-    hideSelectedHighlightFromRotation(defenseRotations[currentSelectedIndex]);
-
-    const selectedRole = selectedPlayer.role;
-    // at this stage the currentSelectedIndex has not yet been updated so it can't be used as the value
-    const newIndex = Number(rotationRadio.value());
-    selectedPlayer = receiveRotations[newIndex].getPlayerByRole(selectedRole);
-    referenceRotations[newIndex].getPlayerByRole(selectedPlayer.role).showSelectedHighlight();
-    receiveRotations[newIndex].getPlayerByRole(selectedPlayer.role).showSelectedHighlight();
-    defenseRotations[newIndex].getPlayerByRole(selectedPlayer.role).showSelectedHighlight();
-    showConstraintsForPlayer(selectedPlayer, receiveRotations[newIndex]);
-}
-
-function displayCourtTitle(title, court) {
-    push();
-    textAlign(LEFT, BOTTOM);
-    textSize(courtTitleSize);
-    textStyle(BOLD);
-    text(title, court.x, court.y);
-    pop();
+    priorityPlayers = [];
+    constraints = [];
 }

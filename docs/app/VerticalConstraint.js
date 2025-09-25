@@ -24,4 +24,8 @@ class VerticalConstraint {
     setX(x) {
         this.x = x;
     }
+
+    setToPlayer(player) {
+        this.setX(player.x);
+    }
 }
