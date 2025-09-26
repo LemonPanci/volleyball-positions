@@ -14,7 +14,7 @@ let startingPositionRadio;
 let currentSelectedIndex = 0;
 // list of players to be drawn on the top layer (above the constraint lines)
 let priorityPlayers = [];
-// Player Object currently being dragged
+// role currently selected for displaying constraints
 let selectedRole;
 // Constraint Objects
 let verticalConstraint1;
