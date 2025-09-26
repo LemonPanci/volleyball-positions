@@ -8,8 +8,6 @@ let receiveRotations;
 let defenseRotations;
 // Inputs
 let rotationRadio;
-let constraintsRadio;
-let startingPositionRadio;
 // Number of the currently selected rotation
 let currentSelectedIndex = 0;
 // list of players to be drawn on the top layer (above the constraint lines)
