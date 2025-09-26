@@ -1,4 +1,4 @@
-class VerticalConstraint {
+export class VerticalConstraint {
     constructor(x, y1, y2, color) {
         let validatedColor = color;
         if (typeof color === 'undefined') {

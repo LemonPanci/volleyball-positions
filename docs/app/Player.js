@@ -1,4 +1,4 @@
-class Player {
+export class Player {
     constructor(x, y, size, role, startingPosition) {
         this.x = x;
         this.y = y;

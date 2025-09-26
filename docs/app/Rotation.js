@@ -1,4 +1,6 @@
-class Rotation {
+import { Player } from "./Player.js";
+
+export class Rotation {
     constructor(x, y, courtSize, roles, option, noInvalidColor) {
         if (roles.length != 6) {
             throw Error("expects an array of 6 players");
@@ -47,6 +49,8 @@ class Rotation {
         this.p5p6 = true;
 
         this.noInvalidColor = noInvalidColor;
+        this.validPlayerColor = "lightgreen";
+        this.invalidPlayerColor = "red";
     }
 
     display() {
@@ -250,44 +254,44 @@ class Rotation {
     }
 
     updateColors() {
-        this.p1.updateColor(validPlayerColor);
-        this.p2.updateColor(validPlayerColor);
-        this.p3.updateColor(validPlayerColor);
-        this.p4.updateColor(validPlayerColor);
-        this.p5.updateColor(validPlayerColor);
-        this.p6.updateColor(validPlayerColor);
+        this.p1.updateColor(this.validPlayerColor);
+        this.p2.updateColor(this.validPlayerColor);
+        this.p3.updateColor(this.validPlayerColor);
+        this.p4.updateColor(this.validPlayerColor);
+        this.p5.updateColor(this.validPlayerColor);
+        this.p6.updateColor(this.validPlayerColor);
 
         if (this.noInvalidColor) {
             return;
         }
 
         if (!this.p1p2) {
-            this.p1.updateColor(invalidPlayerColor);
-            this.p2.updateColor(invalidPlayerColor);
+            this.p1.updateColor(this.invalidPlayerColor);
+            this.p2.updateColor(this.invalidPlayerColor);
         }
         if (!this.p1p6) {
-            this.p1.updateColor(invalidPlayerColor);
-            this.p6.updateColor(invalidPlayerColor);
+            this.p1.updateColor(this.invalidPlayerColor);
+            this.p6.updateColor(this.invalidPlayerColor);
         }
         if (!this.p2p3) {
-            this.p2.updateColor(invalidPlayerColor);
-            this.p3.updateColor(invalidPlayerColor);
+            this.p2.updateColor(this.invalidPlayerColor);
+            this.p3.updateColor(this.invalidPlayerColor);
         }
         if (!this.p3p4) {
-            this.p3.updateColor(invalidPlayerColor);
-            this.p4.updateColor(invalidPlayerColor);
+            this.p3.updateColor(this.invalidPlayerColor);
+            this.p4.updateColor(this.invalidPlayerColor);
         }
         if (!this.p3p6) {
-            this.p3.updateColor(invalidPlayerColor);
-            this.p6.updateColor(invalidPlayerColor);
+            this.p3.updateColor(this.invalidPlayerColor);
+            this.p6.updateColor(this.invalidPlayerColor);
         }
         if (!this.p4p5) {
-            this.p4.updateColor(invalidPlayerColor);
-            this.p5.updateColor(invalidPlayerColor);
+            this.p4.updateColor(this.invalidPlayerColor);
+            this.p5.updateColor(this.invalidPlayerColor);
         }
         if (!this.p5p6) {
-            this.p5.updateColor(invalidPlayerColor);
-            this.p6.updateColor(invalidPlayerColor);
+            this.p5.updateColor(this.invalidPlayerColor);
+            this.p6.updateColor(this.invalidPlayerColor);
         }
     }
 

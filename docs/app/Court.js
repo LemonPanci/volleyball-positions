@@ -1,4 +1,4 @@
-class Court {
+export class Court {
     constructor(x, y, size, option) {
         this.x = x;
         this.y = y;
