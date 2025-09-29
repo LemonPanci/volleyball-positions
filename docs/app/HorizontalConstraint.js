@@ -1,4 +1,4 @@
-class HorizontalConstraint {
+export class HorizontalConstraint {
     constructor(x1, x2, y, color) {
         let validatedColor = color;
         if (typeof color === 'undefined') {

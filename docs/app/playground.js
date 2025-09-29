@@ -1,3 +1,22 @@
+import { Court } from './Court.js';
+import { Rotation } from './Rotation.js';
+import { Player } from './Player.js';
+import { VerticalConstraint } from './VerticalConstraint.js';
+import { HorizontalConstraint } from './HorizontalConstraint.js';
+import {
+    getReceiveP1,
+    getReceiveP2,
+    getReceiveP3,
+    getReceiveP4,
+    getReceiveP5,
+    getReceiveP6,
+    getNoFrontSwapDefenseP1,
+    getNeutralDefenseP2,
+    getNeutralDefenseP3,
+    getNeutralDefenseP4,
+    getNeutralDefenseP5,
+    getNeutralDefenseP6
+} from './formations.js';
 // Court Objects
 let draggableCourt;
 // Lists of Rotation Objects
@@ -32,7 +51,7 @@ let constraints = [];
 const validPlayerColor = "lightgreen";
 const invalidPlayerColor = "red";
 
-function setup() {
+window.setup = () => {
     const headerElement = select('header');
     const instructionElement = select('#playground_instructions');
     const availableHeight = windowHeight - headerElement.height - instructionElement.height;
@@ -190,7 +209,7 @@ function setup() {
     startingPositionRadio.changed(setStartingPosition);
 }
 
-function draw() {
+window.draw = () => {
     background('white');
 
     draggableCourt.setOption(courtRadio.value());
@@ -210,11 +229,11 @@ function draw() {
 }
 
 // on mouse press starts dragging the player underneath and shows the constraint highlights
-function mousePressed() {
+window.mousePressed = () => {
     startDraggingPlayer(mouseX, mouseY);
 }
 
-function touchStarted() {
+window.touchStarted = () => {
     startDraggingPlayer(touches[0].x, touches[0].y);
 }
 
@@ -237,11 +256,11 @@ function startDraggingPlayer(x, y) {
 }
 
 // on mouse dragged if a player is being dragged update it's position and if necessary it's related constraints
-function mouseDragged() {
+window.mouseDragged = () => {
     dragPlayer(mouseX, mouseY);
 }
 
-function touchMoved() {
+window.touchMoved = () => {
     dragPlayer(touches[0].x, touches[0].y);
 }
 
@@ -262,11 +281,11 @@ function dragPlayer(x, y) {
 }
 
 // on mouse release stops dragging the player underneath and hides the constraint highlights
-function mouseReleased() {
+window.mouseReleased = () => {
     stopDraggingPlayer();
 }
 
-function touchEnded() {
+window.touchEnded = () => {
     stopDraggingPlayer();
 }
 

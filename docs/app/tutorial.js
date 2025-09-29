@@ -1,3 +1,22 @@
+import { Court } from './Court.js';
+import { Rotation } from './Rotation.js';
+import { Player } from './Player.js';
+import { VerticalConstraint } from './VerticalConstraint.js';
+import { HorizontalConstraint } from './HorizontalConstraint.js';
+import {
+    getReceiveP1,
+    getReceiveP2,
+    getReceiveP3,
+    getReceiveP4,
+    getReceiveP5,
+    getReceiveP6,
+    getNoFrontSwapDefenseP1,
+    getNeutralDefenseP2,
+    getNeutralDefenseP3,
+    getNeutralDefenseP4,
+    getNeutralDefenseP5,
+    getNeutralDefenseP6
+} from './formations.js';
 // Court Objects
 let receiveCourt;
 let referenceCourt;
@@ -24,7 +43,7 @@ const validPlayerColor = "lightgreen";
 const invalidPlayerColor = "red";
 const courtTitleSize = 30;
 
-function setup() {
+window.setup = () => {
     const canvasSize = Math.min(windowWidth / 3, windowHeight * 3 / 5);
     let canvas = createCanvas(3 * canvasSize, canvasSize + courtTitleSize);
     canvas.parent("tutorial_canvas");
@@ -140,7 +159,7 @@ function displayCourtTitle(title, court) {
  * updates the constraint for the player in the receive court
  * repaints the canvas
  */
-function mouseClicked() {
+window.mouseClicked = () => {
     if (mouseY < 0) {
         // prevent changes when clicking the rotation radio, in order to keep selection across different rotations
         return;
