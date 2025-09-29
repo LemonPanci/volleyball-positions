@@ -1,6 +1,6 @@
 import { Player } from "./Player.js";
 
-export class Rotation {
+export class Formation {
     constructor(x, y, courtSize, roles, option, noInvalidColor) {
         if (roles.length != 6) {
             throw Error("expects an array of 6 players");

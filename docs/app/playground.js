@@ -1,5 +1,5 @@
 import { Court } from './Court.js';
-import { Rotation } from './Rotation.js';
+import { Formation } from './Formation.js';
 import { Player } from './Player.js';
 import { VerticalConstraint } from './VerticalConstraint.js';
 import { HorizontalConstraint } from './HorizontalConstraint.js';
@@ -19,13 +19,13 @@ import {
 } from './formations.js';
 // Court Objects
 let draggableCourt;
-// Lists of Rotation Objects
-let draggableRotations;
-let referenceRotations;
-let receiveRotations;
-let defenseRotations;
-// Currently displayed draggable Rotation Object
-let currentRotation;
+// Lists of Formations Objects
+let draggableFormations;
+let referenceFormations;
+let receiveFormations;
+let defenseFormations;
+// Currently displayed draggable Formations Object
+let currentFormation;
 // Inputs
 let resetButton;
 let rotationRadio;
@@ -66,33 +66,33 @@ window.setup = () => {
     ];
 
     const canvasPadding = 10;
-    // set up court and rotations for the draggable part
+    // set up court and formations for the draggable part
     const courtSize = canvasSize - 2 * canvasPadding;
     const courtX = canvasPadding;
     const courtY = canvasPadding;
     draggableCourt = new Court(courtX, courtY, courtSize);
 
-    draggableRotations = [
-        new Rotation(courtX, courtY, courtSize, roles, 0),
-        new Rotation(courtX, courtY, courtSize, roles, 1),
-        new Rotation(courtX, courtY, courtSize, roles, 2),
-        new Rotation(courtX, courtY, courtSize, roles, 3),
-        new Rotation(courtX, courtY, courtSize, roles, 4),
-        new Rotation(courtX, courtY, courtSize, roles, 5)
+    draggableFormations = [
+        new Formation(courtX, courtY, courtSize, roles, 0),
+        new Formation(courtX, courtY, courtSize, roles, 1),
+        new Formation(courtX, courtY, courtSize, roles, 2),
+        new Formation(courtX, courtY, courtSize, roles, 3),
+        new Formation(courtX, courtY, courtSize, roles, 4),
+        new Formation(courtX, courtY, courtSize, roles, 5)
     ];
 
-    // set up reference rotations
-    referenceRotations = [
-        new Rotation(courtX, courtY, courtSize, roles, 0),
-        new Rotation(courtX, courtY, courtSize, roles, 1),
-        new Rotation(courtX, courtY, courtSize, roles, 2),
-        new Rotation(courtX, courtY, courtSize, roles, 3),
-        new Rotation(courtX, courtY, courtSize, roles, 4),
-        new Rotation(courtX, courtY, courtSize, roles, 5)
+    // set up reference formations
+    referenceFormations = [
+        new Formation(courtX, courtY, courtSize, roles, 0),
+        new Formation(courtX, courtY, courtSize, roles, 1),
+        new Formation(courtX, courtY, courtSize, roles, 2),
+        new Formation(courtX, courtY, courtSize, roles, 3),
+        new Formation(courtX, courtY, courtSize, roles, 4),
+        new Formation(courtX, courtY, courtSize, roles, 5)
     ];
 
-    // set up receive rotations
-    receiveRotations = [
+    // set up receive formations
+    receiveFormations = [
         getReceiveP1(courtX, courtY, courtSize, roles),
         getReceiveP2(courtX, courtY, courtSize, roles),
         getReceiveP3(courtX, courtY, courtSize, roles),
@@ -101,8 +101,8 @@ window.setup = () => {
         getReceiveP6(courtX, courtY, courtSize, roles)
     ];
 
-    // set up defense rotation
-    defenseRotations = [
+    // set up defense formations
+    defenseFormations = [
         getNoFrontSwapDefenseP1(courtX, courtY, courtSize, roles),
         getNeutralDefenseP2(courtX, courtY, courtSize, roles),
         getNeutralDefenseP3(courtX, courtY, courtSize, roles),
@@ -216,8 +216,8 @@ window.draw = () => {
     draggableCourt.display();
 
     currentSelectedIndex = Number(rotationRadio.value());
-    currentRotation = draggableRotations[currentSelectedIndex];
-    currentRotation.display();
+    currentFormation = draggableFormations[currentSelectedIndex];
+    currentFormation.display();
 
     for (let i = 0; i < constraints.length; ++i) {
         constraints[i].display();
@@ -238,7 +238,7 @@ window.touchStarted = () => {
 }
 
 function startDraggingPlayer(x, y) {
-    draggedPlayer = currentRotation.getPlayerByPosition(x, y);
+    draggedPlayer = currentFormation.getPlayerByPosition(x, y);
     if (draggedPlayer) {
         switch (constraintsRadio.value()) {
             case "for":
@@ -297,48 +297,38 @@ function stopDraggingPlayer() {
     draggedPlayer = null;
 }
 
-// sets the position of the player in the draggable court to the receive position
-function copyReceiveRotation() {
-    currentRotation.copyCourtPositions(receiveRotations[currentSelectedIndex]);
-}
-
-// sets the position of the players in the draggable court to the defense position
-function copyDefenseRotation() {
-    currentRotation.copyCourtPositions(defenseRotations[currentSelectedIndex])
-}
-
 function setRotation() {
-    let rotationsToCopy;
+    let formationsToCopy;
     switch (formationRadio.value()) {
         case "receive":
-            rotationsToCopy = receiveRotations;
+            formationsToCopy = receiveFormations;
             break;
         case "defense":
-            rotationsToCopy = defenseRotations;
+            formationsToCopy = defenseFormations;
             break;
         case "base":
         default:
-            rotationsToCopy = referenceRotations;
+            formationsToCopy = referenceFormations;
             break;
     }
-    for (let i = 0; i < draggableRotations.length; ++i) {
-        draggableRotations[i].copyCourtPositions(rotationsToCopy[i]);
+    for (let i = 0; i < draggableFormations.length; ++i) {
+        draggableFormations[i].copyCourtPositions(formationsToCopy[i]);
     }
 }
 
 function toggleInvalidColor() {
     disableInvalidColorFlag = !disableInvalidColorFlag;
-    for (let i = 0; i < draggableRotations.length; ++i) {
-        draggableRotations[i].setInvalidColor(disableInvalidColorFlag);
+    for (let i = 0; i < draggableFormations.length; ++i) {
+        draggableFormations[i].setInvalidColor(disableInvalidColorFlag);
     }
 }
 
 // shows the positional constraints for the currently dragged player and which players are the source for those constraints
 function showConstraintsForDragged() {
-    const draggedIndex = currentRotation.getIndexByRole(draggedPlayer.role);
-    const previous = currentRotation.getPreviousPlayer(draggedPlayer);
-    const next = currentRotation.getNextPlayer(draggedPlayer);
-    const opposite = currentRotation.getOppositePlayer(draggedPlayer);
+    const draggedIndex = currentFormation.getIndexByRole(draggedPlayer.role);
+    const previous = currentFormation.getPreviousPlayer(draggedPlayer);
+    const next = currentFormation.getNextPlayer(draggedPlayer);
+    const opposite = currentFormation.getOppositePlayer(draggedPlayer);
     switch (draggedIndex) {
         // players in position 1 and 4
         case 0:
@@ -403,13 +393,13 @@ function hideConstraintsFromDragged() {
 function setStartingPosition() {
     switch (startingPositionRadio.value()) {
         case "enabled":
-            draggableRotations.forEach(rotation => {
-                rotation.showStartingPositions();
+            draggableFormations.forEach(formation => {
+                formation.showStartingPositions();
             });
             return;
         case "disabled":
-            draggableRotations.forEach(rotation => {
-                rotation.hideStartingPositions();
+            draggableFormations.forEach(formation => {
+                formation.hideStartingPositions();
             });
             return;
     }
