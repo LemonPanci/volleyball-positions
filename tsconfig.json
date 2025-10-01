@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    // "module": "CommonJS",
+    // "module": "none",
+    "module": "es6",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "outDir": "docs/build"
+    // "outFile": "docs/build/test.js"
+  },
+  "include": ["docs/app/*"],
+}
